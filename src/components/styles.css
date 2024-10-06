@@ -1,0 +1,504 @@
+/* src/styles.css */
+
+/* =====================================
+   RESET AND BASE STYLES
+   ===================================== */
+   * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #ece9e6, #ffffff);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .App {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  
+  /* =====================================
+     GAME CONTAINER STYLES
+     ===================================== */
+  .game-container {
+    background: #ffffff;
+    padding: 30px 50px;
+    border-radius: 15px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    transition: transform 0.3s ease;
+    position: relative;
+  }
+  
+  .game-container:hover {
+    transform: translateY(-5px);
+  }
+  
+  h1 {
+    margin-bottom: 25px;
+    font-size: 2.5rem;
+    color: #333;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* =====================================
+     MODE SELECTION STYLES
+     ===================================== */
+  .mode-selection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .mode-options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .mode-button {
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .mode-button:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+  }
+  
+  /* =====================================
+     DIFFICULTY SELECTION STYLES
+     ===================================== */
+  .difficulty-selection {
+    margin-top: 20px;
+  }
+  
+  .difficulty-button {
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    background-color: #6c757d;
+    color: white;
+  }
+  
+  .difficulty-button.active {
+    background-color: #343a40;
+  }
+  
+  .difficulty-button:hover {
+    background-color: #5a6268;
+    transform: scale(1.05);
+  }
+  
+  /* =====================================
+     FIRST PLAYER SELECTION STYLES
+     ===================================== */
+  .first-player-selection {
+    margin-top: 20px;
+  }
+  
+  .first-player-button {
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    background-color: #6f42c1;
+    color: white;
+  }
+  
+  .first-player-button.active {
+    background-color: #5a32a3;
+  }
+  
+  .first-player-button:hover {
+    background-color: #5a32a3;
+    transform: scale(1.05);
+  }
+  
+  /* =====================================
+     BOARD AND CELL STYLES
+     ===================================== */
+  .board {
+    position: relative; /* To position the winning line absolutely */
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 25px;
+    perspective: 1000px; /* For 3D effect */
+  }
+  
+  .cell {
+    width: 100px;
+    height: 100px;
+    background: #f0f0f0;
+    border: none;
+    border-radius: 10px;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.3s, box-shadow 0.3s;
+    position: relative;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+    transform-style: preserve-3d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .cell:hover {
+    background-color: #e0e0e0;
+    transform: translateZ(10px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .cell:active {
+    transform: translateZ(20px);
+  }
+  
+  .cell.highlight {
+    background-color: #90ee90 !important;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transform: translateZ(15px);
+  }
+  
+  /* =====================================
+     WINNING LINE STYLES
+     ===================================== */
+  .winning-line {
+    position: absolute;
+    background-color: #ff5722;
+    transition: all 0.5s ease-in-out;
+    animation: drawLine 0.5s forwards;
+    z-index: 1;
+  }
+  
+  @keyframes drawLine {
+    from {
+      width: 0;
+    }
+    to {
+      width: 300px; 
+    }
+  }
+  
+  .winning-line[style*="height"] {
+    width: 5px;
+    height: 300px;
+  }
+  
+  .winning-line[style*="rotate(-45deg)"],
+  .winning-line[style*="rotate(45deg)"] {
+    width: 424px; /* Diagonal length */
+  }
+  
+  
+  .message {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: #555;
+  }
+  
+  .scoreboard {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  .scoreboard p {
+    margin: 0;
+  }
+ 
+  .controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+  }
+  
+  .reset-button {
+    padding: 10px 25px;
+    font-size: 1rem;
+    background-color: #007BFF;
+    border: none;
+    color: white;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .reset-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+  }
+  
+  .undo-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #ffc107;
+    border: none;
+    border-radius: 2 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    color: #212529;
+  }
+  
+  .undo-button:hover:enabled {
+    background-color: #e0a800;
+    transform: scale(1.05);
+  }
+  
+  .undo-button:disabled {
+    background-color: #ffeeba;
+    cursor: not-allowed;
+  }
+  
+  .back-button {
+    margin-top: 20px;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    background-color: #17a2b8;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    color: white;
+  }
+  
+  .back-button:hover {
+    background-color: #138496;
+    transform: scale(1.05);
+  }
+  
+  
+  .history {
+    margin-top: 20px;
+    text-align: left;
+  }
+  
+  .history ul {
+    list-style-type: none;
+    padding: 0;
+    max-height: 150px;
+    overflow-y: auto;
+  }
+  
+  .history li {
+    margin-bottom: 5px;
+  }
+  
+  .history button {
+    background: none;
+    border: none;
+    color: #007bff;
+    cursor: pointer;
+    padding: 5px;
+    transition: color 0.3s;
+    font-size: 0.9rem;
+  }
+  
+  .history button:hover {
+    color: #0056b3;
+  }
+  
+
+  .theme-toggle {
+    margin-bottom: 15px;
+    padding: 8px 16px;
+    background-color: #95a5a6;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    color: white;
+    transition: background-color 0.3s;
+  }
+  
+  .theme-toggle:hover {
+    background-color: #7f8c8d;
+  }
+  
+  .game-container.dark .theme-toggle {
+    background-color: #7f8c8d;
+  }
+  
+  .game-container.dark .theme-toggle:hover {
+    background-color: #95a5a6;
+  }
+  
+
+  .game-container.dark {
+    background: #2c3e50;
+    color: #ecf0f1;
+    box-shadow: 0 15px 35px rgba(255, 255, 255, 0.2);
+  }
+  
+  .game-container.dark .cell {
+    background: #34495e;
+    color: #ecf0f1;
+  }
+  
+  .game-container.dark .cell:hover {
+    background-color: #3d566e;
+  }
+  
+  .game-container.dark .message,
+  .game-container.dark .scoreboard p {
+    color: #bdc3c7;
+  }
+  
+  .game-container.dark .reset-button {
+    background-color: #e74c3c;
+  }
+  
+  .game-container.dark .reset-button:hover {
+    background-color: #c0392b;
+  }
+  
+  .game-container.dark .undo-button {
+    background-color: #f39c12;
+    color: #212529;
+  }
+  
+  .game-container.dark .undo-button:hover:enabled {
+    background-color: #d35400;
+  }
+  
+  .game-container.dark .history button {
+    color: #3498db;
+  }
+  
+  .game-container.dark .history button:hover {
+    color: #2980b9;
+  }
+  
+  .game-container.dark .back-button {
+    background-color: #16a085;
+  }
+  
+  .game-container.dark .back-button:hover {
+    background-color: #138d75;
+  }
+  
+
+  @media (max-width: 768px) {
+    .game-container {
+      padding: 20px 30px;
+    }
+  
+    h1 {
+      font-size: 2rem;
+    }
+  
+    .board {
+      grid-template-columns: repeat(3, 80px);
+      gap: 10px;
+    }
+  
+    .cell {
+      width: 80px;
+      height: 80px;
+      font-size: 1.5rem;
+    }
+  
+    .scoreboard p {
+      font-size: 0.9rem;
+    }
+  
+    .message {
+      font-size: 1rem;
+    }
+  
+    .reset-button,
+    .undo-button,
+    .back-button,
+    .mode-button,
+    .difficulty-button,
+    .first-player-button {
+      padding: 8px 16px;
+      font-size: 0.9rem;
+    }
+  
+    .winning-line {
+      width: 240px; 
+      height: 5px;
+    }
+  
+    .winning-line[style*="height"] {
+      height: 240px;
+    }
+  
+    .winning-line[style*="rotate(-45deg)"],
+    .winning-line[style*="rotate(45deg)"] {
+      width: 338px; /* Diagonal length adjusted */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .game-container {
+      padding: 15px 20px;
+    }
+  
+    h1 {
+      font-size: 1.8rem;
+    }
+  
+    .board {
+      grid-template-columns: repeat(3, 70px);
+      gap: 8px;
+    }
+  
+    .cell {
+      width: 70px;
+      height: 70px;
+      font-size: 1.2rem;
+    }
+  
+    .scoreboard {
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+    }
+  
+    .history ul {
+      max-height: 100px;
+    }
+  
+    .winning-line {
+      width: 210px;
+      height: 5px;
+    }
+  
+    .winning-line[style*="height"] {
+      height: 210px;
+    }
+  
+    .winning-line[style*="rotate(-45deg)"],
+    .winning-line[style*="rotate(45deg)"] {
+      width: 300px;
+    }
+  }
+  
